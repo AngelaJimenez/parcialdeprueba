@@ -93,4 +93,7 @@ public class SerieDTO implements Serializable {
         serieEntity.setReleaseYear(this.releaseYear);
         return serieEntity;
     }
+    
+
+    
 }

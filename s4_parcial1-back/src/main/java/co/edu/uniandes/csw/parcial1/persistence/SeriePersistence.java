@@ -31,5 +31,20 @@ public class SeriePersistence {
         Query q = em.createQuery("select u from SerieEntity u");
         return q.getResultList();
     }
-    
+        /**
+     * Crea una publicación en la base de datos
+     *
+     * @param serieEntity objeto author que se creará en la base de datos
+     * @return devuelve la entidad creada con un id dado por la base de datos.
+     */
+    public SerieEntity create(SerieEntity serieEntity) {
+        LOGGER.log(Level.INFO, "Creando una serie nueva");
+        /* Note que hacemos uso de un método propio de EntityManager para persistir la author en la base de datos.
+        Es similar a "INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);" en SQL.
+         */
+        em.persist(serieEntity);
+        LOGGER.log(Level.INFO, "Serie creada");
+        return serieEntity;
+    }
+
 }

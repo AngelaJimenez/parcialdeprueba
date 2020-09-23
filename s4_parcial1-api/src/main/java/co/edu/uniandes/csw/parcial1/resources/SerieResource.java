@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.parcial1.resources;
 import co.edu.uniandes.csw.parcial1.dtos.SerieDTO;
 import co.edu.uniandes.csw.parcial1.ejb.SerieLogic;
 import co.edu.uniandes.csw.parcial1.entities.SerieEntity;
+import co.edu.uniandes.csw.parcial1.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -51,5 +53,13 @@ public class SerieResource {
         }
         return list;
     }
-    
+        
+    @POST
+    public SerieDTO createSerie(SerieDTO serie) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "SerieResource createSerie: input: {0}", serie);
+        SerieDTO nuevaSerieDTO = new SerieDTO(serieLogic.createSerie(serie.toEntity()));
+        LOGGER.log(Level.INFO, "SerieResource createSerie: output: {0}", nuevaSerieDTO);
+        return nuevaSerieDTO;
+    }   
+
 }
